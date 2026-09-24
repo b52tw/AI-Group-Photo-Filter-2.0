@@ -41,15 +41,10 @@ jobs:
         shell: powershell
         run: |
           pyinstaller --noconfirm --clean --onefile --windowed --name "JunBa_AI_Photo_Classifier_v2.0" --collect-all pillow_heif --add-data "face_detection_yunet_2023mar.onnx;." --add-data "w600k_r50.onnx;." --add-data "yolov8n.onnx;." junba_ai_photo_v2.py
-      - name: Package Portable ZIP
-        shell: powershell
-        run: |
-          New-Item -ItemType Directory -Path "portable" -Force | Out-Null
-          Copy-Item "dist\JunBa_AI_Photo_Classifier_v2.0.exe" "portable\峻爸_AI智慧照片分類器_v2.0.exe"
-          Copy-Item "README_v2.0.txt" "portable\README_v2.0.txt"
-          Compress-Archive -Path "portable\*" -DestinationPath "峻爸_AI智慧照片分類器_v2.0_Windows_Portable.zip" -Force
-      - uses: actions/upload-artifact@v4
+      - name: Upload Windows EXE
+        uses: actions/upload-artifact@v4
         with:
-          name: JunBa-AI-Photo-Classifier-v2.0-Windows-Portable
-          path: 峻爸_AI智慧照片分類器_v2.0_Windows_Portable.zip
+          name: JunBa-AI-Photo-Classifier-v2.0-Windows
+          path: dist/JunBa_AI_Photo_Classifier_v2.0.exe
+          if-no-files-found: error
           retention-days: 30
