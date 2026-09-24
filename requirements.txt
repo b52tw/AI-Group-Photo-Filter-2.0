@@ -1,0 +1,5 @@
+opencv-python>=4.10
+numpy>=1.26,<3
+Pillow>=10
+pillow-heif>=0.18
+pyinstaller>=6.10
